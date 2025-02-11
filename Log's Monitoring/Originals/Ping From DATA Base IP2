@@ -1,0 +1,48 @@
+<?php
+$host="localhost"; // Host name
+$username="root"; // Mysql username
+$db_password="devolity@1234web"; // Mysql password
+$db_name="link_ip"; // Database name
+$local_db = mysql_connect("$host", "$username", "$db_password")or die(mysql_error());
+mysql_select_db("$db_name",$local_db)or die("cannot select DB");
+//mysql_query (" INSERT INTO `lnklist_ip`( `list_ip`, `status`) VALUES (1234234123,1)");
+
+?>
+
+<html>
+<body>
+<b><Marquee><u> devolity LOG'S MONITORING </u> </marquee></b>
+<br><a href="index.php"><img src="devolitymail-logo.jpg"></a></br>
+<b><u> LINK SERVER IP PING STATUS </u></b>
+<?php
+
+echo "SELECT * FROM `lnklist_ip`";;
+$result = mysql_query("SELECT * FROM `lnklist_ip`") or die(mysql_error());
+//echo "found";die;
+$ip_array = array();
+$cnt=0;
+while($result_arr = mysql_fetch_array($result))
+{
+$cnt+=1;
+
+
+$ip_array[] = $result_arr['list_ip'];
+//echo "<br>{$result_arr['type']}<br>";
+
+}
+$ip_string = implode($ip_array," ");
+//echo "<br>***************<br>";
+//echo $ip_string;
+//die;
+?>
+
+<?php
+echo '<pre>';
+
+// Outputs all the result of shellcommand "ls", and returns
+// the last output line into $last_line. Stores the return value
+// of the shell command in $retval.
+system('fping '.$ip_string, $retval);
+
+// Printing additional info
+

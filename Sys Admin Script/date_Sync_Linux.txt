@@ -1,0 +1,3 @@
+yum install ntp -y
+service ntpd restart
+/usr/sbin/ntpdate 1.centos.pool.ntp.org

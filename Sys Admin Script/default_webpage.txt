@@ -1,0 +1,46 @@
+############ Make entry on first of all virtual server Entry #####
+<VirtualHost 103.255.101.13:80>
+    ServerName 103.255.101.13
+    DocumentRoot /usr/local/apache/htdocs
+    ServerAdmin abc@xyz.com
+    <IfModule mod_suphp.c>
+        suPHP_UserGroup nobody nobody
+    </IfModule>
+    UserDir disabled
+</VirtualHost>
+
+
+#######################
+
+cat index.html 
+<html><head><META HTTP-EQUIV="refresh" CONTENT="0;URL=/cgi-sys/defaultwebpage.cgi"></head><body></body></html>
+
+
+########################## Make File index.html on given path /usr/local/apache/htdocs
+
+<html>
+
+<body bgcolor="#FFD700">
+<center> <font size="99" face="verdana" color="green">SORRY !</font> </center>
+<p>It is possible you have reached this page because: </p>
+
+<p><b><h2>The IP address has changed.</h2></b></p>
+<blockquote>
+The IP address for this domain may have changed recently. Check your DNS settings to verify that the domain is set up correctly. It may take 8-24 hours for DNS changes to propagate. It may be possible to restore access to this site by following these instructions for clearing your dns cache
+</blockquote>
+
+<p><b><h2>There has been a server misconfiguration.</h2></b></p>
+<blockquote>
+Please verify that your hosting provider has the correct IP address configured for your Apache settings and DNS records. A restart of Apache may be required for new settings to take affect.
+</blockquote>
+
+<p><b><h2>The site may have been moved to a different server.</h2></b></p>
+<blockquote>
+The URL for this domain may have changed or the hosting provider may have moved the account to a different server.
+</blockquote>
+
+</body>
+</html>
+
+#############################
+

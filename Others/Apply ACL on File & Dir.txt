@@ -1,0 +1,29 @@
+   27  useradd bhupesh
+   28  useradd piyush
+   29  cat /etc/passwd
+   30  passwd -d abhishek bhupesh piyush
+   31  passwd -d abhishek
+   32  passwd -d bhupesh
+   33  passwd -d piyush
+   34  mkdir test
+   36  cp *.sh test/
+   38  ll
+   39  cd ll
+   40  cd test/
+   41  ll
+   42  getfacl 
+   43  getfacl install.sh master.sh Withapp.sh 
+   44  su bhupesh
+   45  setfacl -m u:bhupesh:rwx master.sh 
+   46  getfacl  master.sh 
+   47  setfacl -m u:piyush:- master.sh 
+   49  getfacl  master.sh 
+   50  su piyush
+   
+   54  setfacl -b -m u:piyush:- master.sh 
+   55  getfacl master.sh 
+
+   57  setfacl -x u:piyush master.sh 
+
+
+http://www.calculate-linux.org/main/en/setting_filesystem_acl

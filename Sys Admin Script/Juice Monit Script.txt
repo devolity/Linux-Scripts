@@ -1,0 +1,184 @@
+#!/bin/bash
+
+mem=`cat /proc/meminfo |egrep "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+bufr=`cat /proc/meminfo |egrep -i "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+cach=`cat /proc/meminfo |egrep -i "^Cached:\\s*([0-9]+)"|awk '{print $2}'`
+
+echo $mem+$bufr+$cach
+
+kib=$(expr "$mem" + "$bufr" + "$cach") >/dev/null
+
+echo $kib
+                                    if(kib > 1048576){
+                                        setText(kib / 1024 / 1024 + "GB");
+                                    } elseif (kib > 1024){
+                                        setText(kib / 1024 + "MB");
+                                    }
+ else
+ {
+                                        setText(kib + "KB");
+                                    }
+
+###########################
+#!/bin/bash
+
+mem=`cat /proc/meminfo |egrep "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+bufr=`cat /proc/meminfo |egrep -i "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+cach=`cat /proc/meminfo |egrep -i "^Cached:\\s*([0-9]+)"|awk '{print $2}'`
+
+kib=$(expr "$mem" + "$bufr" + "$cach") >/dev/null
+
+#echo $kib KBi
+
+ if [ $kib -gt 1048576 ]
+             then
+              GB=$(expr "$kib" / "1024" / "1024")
+echo $GB
+        elif [ $kib -lt 1024 ]
+             then
+              echo "Small"
+        else
+              echo "Equal"
+      fi
+
+
+#######LOAD AVERAGE
+
+#uptime |awk '{print $10 $11 $12 }'
+
+############DISK USAGE
+
+#df | grep ' /$'| awk '{print $5}'
+
+######### NETWORK USAGE
+
+#cat /proc/net/dev|egrep -o "s*([0-9]+)" >/dev/null
+
+#########DISK USAGE
+
+#cat /proc/stat
+###########################################
+
+#!/bin/bash
+
+mem=`cat /proc/meminfo |egrep "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+bufr=`cat /proc/meminfo |egrep -i "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+cach=`cat /proc/meminfo |egrep -i "^Cached:\\s*([0-9]+)"|awk '{print $2}'`
+
+#kib=$(expr "$mem" + "$bufr" + "$cach") >/dev/null
+
+kib=`echo 10`
+#echo $kib
+                                if ( $kib > 11 );
+                                    then
+                                        echo "run1"
+                                    # sum=$(expr "$kib" / "1024" / "1024" + "GB")
+                                    elif  ( $kib > 24 );
+                                         then
+                                        echo "run 2"
+                                      #  sum2=$(expr "$kib" / "1024" + "0000")
+                                   else
+                                        echo "run 3"
+                                     #sum3=$(expr "$kib" + "0000")
+                                    fi
+#########################
+CPU USAGE LIST:-
+us: user cpu time (or) % CPU time spent in user space
+sy: system cpu time (or) % CPU time spent in kernel space
+ni: user nice cpu time (or) % CPU time spent on low priority processes
+id: idle cpu time (or) % CPU time spent idle
+wa: io wait cpu time (or) % CPU time spent in wait (on disk)
+hi: hardware irq (or) % CPU time spent servicing/handling hardware interrupts
+si: software irq (or) % CPU time spent servicing/handling software interrupts
+st: steal time - - % CPU time in involuntary wait by virtual cpu while hypervisor is servicing another processor (or) % CPU time stolen from a virtual machine
+###############################
+FinAL
+
+#!/bin/bash
+
+memr=`free -m| grep Mem | awk '{print $4}'`
+tmem=`free -m| grep Mem | awk '{print $2}'`
+buff=`free -m| grep -i buff | awk '{print $3}'`
+caac=`free -m| grep -i cach | awk '{print $3}'`
+idks=`df -h| grep ' /$'|awk '{print $2}'`
+
+echo ++++++++++++++++++++++++++++
+echo $memr MB Free Of Total $tmem MB
+echo ++++++++++++++++++++++++++++
+########LOAD AVERAGE
+
+lad=`uptime |awk '{print $10 $11 $12 }'`
+
+echo $lad Load Average
+echo ++++++++++++++++++++++++++++
+############DISK USAGE
+
+idsk=`df | grep ' /$'|awk '{print $5}'`
+
+echo $idsk Usage Disk of $idks
+echo ++++++++++++++++++++++++++++
+
+######### NETWORK USAGE
+top -bn4 | grep "Cpu(s)"
+#cat /proc/net/dev|egrep -o "s*([0-9]+)" >/dev/null
+
+#########DISK USAGE
+
+#cat /proc/stat
+#echo ######################################
+~
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+#!/bin/bash
+
+bufr=`cat /proc/meminfo| egrep "^Buffers:\\s*([0-9]+)"|awk '{print $2}'`
+mfre=`cat /proc/meminfo| egrep "^MemFree:\\s*([0-9]+)"|awk '{print $2}'`
+frem=`cat /proc/meminfo| egrep "^MemTotal:\\s*([0-9]+)"|awk '{print $2}'`
+cahe=`cat /proc/meminfo| egrep "^Cached:\\s*([0-9]+)"|awk '{print $2}'`
+swt=`cat /proc/meminfo| egrep "^SwapTotal:\\s*([0-9]+)"|awk '{print $2}'`
+swf=`cat /proc/meminfo| egrep "^SwapFree:\\s*([0-9]+)"|awk '{print $2}'`
+
+
+idks=`df -h| grep ' /$'|awk '{print $2}'`
+
+echo --------------------------------
+ped=`echo "$[$mfre / 1024]"`
+pee=`echo "$[$frem / 1024]"`
+bfr=`echo "$[$bufr / 1024]"`
+che=`echo "$[$cahe / 1024]"`
+swpt=`echo "$[$swt / 1024 / 1024]"`
+swpf=`echo "$[$swf / 1024 / 1024]"`
+
+echo $ped MB :Free Of Total $pee MB
+echo $che MB :Cache
+echo $bfr MB :Buffers
+echo $swpf GB :Free Swap Of Total $swpt GB
+echo --------------------------------
+########LOAD AVERAGE
+
+lad=`uptime | grep -oP '(?<=average:).*'`
+
+echo $lad Current Load
+echo --------------------------------
+############DISK USAGE
+
+idsk=`df | grep ' /$'|awk '{print $5}'`
+
+echo $idsk Usage Disk of $idks
+echo --------------------------------
+
+######### NETWORK USAGE
+cat /proc/net/dev|egrep -o "s*([0-9]+)" >/dev/null
+
+#########DISK USAGE
+#top -bn4 | grep "Cpu(s)"
+#cat /proc/stat
+echo -------------------------------
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+

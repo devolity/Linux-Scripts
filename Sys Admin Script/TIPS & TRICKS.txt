@@ -1,0 +1,52 @@
+****** MAIL COUNT ****
+cat /var/log/maillog | egrep --color -i 'status=bounced' | wc -l
+
+***** Kill Zombie Process ***
+1. top -- and see no. of zombie process
+
+2. ps aux | grep -w Z --search zombie process list (it not shows the parent process PID) 
+
+or 
+
+ps axjf | grep -w Z -- With parent process PID
+
+3. ps axjf | grep PID --(grep Parent PID)
+
+4. Kill -9 PID --(Parent PID)
+
+############################
+a. create file & make entry.
+# vim ~.ssh/config
+
+***************************
+Host *
+User root
+User shared
+Port 22
+User root
+UserKnownHostsFile /dev/null
+StrictHostKeyChecking no
+Host t
+HostName test.example.org
+Host *
+Compression yes
+CompressionLevel 7
+Cipher blowfish
+ServerAliveInterval 600
+ControlMaster auto
+ControlPath /tmp/ssh-%r@%h:%p
+**************************** ref.= http://tychoish.com/posts/9-awesome-ssh-tricks/
+
+2. ========
+
+SSH User logn detail's and Kill:-
+
+ps -A | grep sshd
+
+sudo ss -lnp | grep sshd  ( listening for incoming connections:)
+
+
+
+
+
+

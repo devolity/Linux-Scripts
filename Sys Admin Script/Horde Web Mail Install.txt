@@ -1,0 +1,436 @@
+Installing Horde Groupware Webmail Edition on CentOS 5
+Versions
+Set up your host name and address
+Installing prerequisites
+Configuring Postfix and Dovecot
+Start services
+Download Horde Groupware Webmail Edition and extract it
+Creating database and tables in MySQL
+    For those who want everything in UTF-8
+    Run the setup.php script:
+    Create user horde in MySQL and grant horde DB the proper permissions
+Configure Apache and PHP
+Check if everything is alright
+Security configuration
+Finishing configuration
+Performance
+        Memcached
+        MySQL
+
+
+
+Installing Horde Groupware Webmail Edition on CentOS 5
+
+Horde Groupware Webmail Edition is a free, enterprise ready, browser based communication suite. Users can read, send and organize email messages and manage and share calendars, contacts, tasks and notes with the standards compliant components from the Horde Project. Horde Groupware Webmail Edition bundles the separately available applications IMP, Ingo, Kronolith, Turba, Nag and Mnemo.
+
+
+Versions
+
+
+    CentOS 5.0 i386 (OS)
+    Horde Groupware Webmail Edition 1.0.3 (October 2 2007)
+    Apache 2.2.3 (http server)
+    MySQL 5.0.22 (db server)
+    Postfix 2.3.3 (mail server)
+    Dovecot 1.0 (IMAP server)
+
+(Although this how to has been made with the above versions, it may work just the same for newer versions of Horde)
+
+
+Set up your host name and address
+
+This is only necessary if you didn't do it at installation.
+
+Use system-config-network-tui to set up IP, Netmask and Gateway:
+
+
+
+system-config-network-tui
+
+Edit /etc/sysconfig/network and set your hostname:
+
+
+
+NETWORKING=yes
+NETWORKING_IPV6=yes
+HOSTNAME=yourhostname.yourdomain.com
+
+Edit /etc/resolv.conf and add your DNS servers:
+
+
+
+nameserver 208.67.222.222
+nameserver 208.67.220.220
+
+Edit /etc/hosts to something like this, according to your system settings:
+
+
+
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1         localhost.localdomain        localhost
+192.168.0.100     yourhostname.yourdomain.com  yourhostname
+::1               localhost6.localdomain6      localhost6
+
+Restart network:
+
+
+
+service network restart
+
+If your using GUI interface (like gnome), you may need to restart it:
+
+
+
+init 6
+
+
+Installing prerequisites
+
+
+
+yum install -y gettext httpd mysql mysql-server dovecot postfix system-switch-mail perl
+
+yum install -y php php-mysql php-xml php-imap php-mbstring php-mcrypt php-pecl-Fileinfo php-pecl-memcache  
+               php-pear-DB php-pear-File php-pear-Log php-pear-Mail-Mime php-pear-Auth-SASL php-pear-Date  
+               php-pear-HTTP-Request php-pear-Mail php-pear-Net-Sieve php-pear-Net-Socket php-pear-Net-SMTP  
+               php-pear-MDB2-Driver-mysql php-gd php-xmlrpc php-soap php-pecl-json
+
+yum install -y php-pear-Date-Holidays            <-- (for now, this package is available in the EPEL[1] repo)
+
+yum install -y openssl mod_ssl crypto-utils perl-Net-SSLeay         <--(for https secure browsing)
+
+yum install -y php-devel gcc      <--(if you want to install extra pecl modules - PS: use 'pear install pecl/modulename')
+
+[1] About EPEL repo: http://fedoraproject.org/wiki/EPEL
+Note: It is possible that yum install may not find any package when installing a php- or http- extensions. We may have to exclude php* and http* from yum.conf (usually in /etc/yum.conf) by renaming php* and http* and then running 'yum install'. This makes it work. Reference: Install PECL
+
+
+Configuring Postfix and Dovecot
+
+Turn off sendmail:
+
+
+
+service sendmail stop
+chkconfig sendmail off
+
+system-switch-mail
+(select postfix)
+
+Configure Postfix:
+
+
+
+postconf -e 'home_mailbox = Maildir/'
+
+Edit /etc/dovecot.conf and add the following to the end of the file:
+
+
+
+# to allow the creation of mail subfolders
+mail_location = maildir:~/Maildir
+
+# Enable IMAP protocol
+protocols = imap
+
+If using CentOS x86_64, temporary fix for this bug
+
+
+login_process_size = 64
+
+To configure the rest of postfix, such as domain name and secure connections, take a look at this nice tutorial: http://fedorasolved.org/server-solutions/postfix-mail-server
+
+
+Start services
+
+
+
+service httpd restart
+chkconfig httpd on
+
+service postfix restart
+chkconfig postfix on
+
+service dovecot restart
+chkconfig dovecot on
+
+service mysqld restart
+chkconfig mysqld on
+
+Configure mysqld root password:
+
+
+
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root -h yourhostname.yourdomain.com password 'new-password'
+
+
+Download Horde Groupware Webmail Edition and extract it
+
+Get the latest stable version of Horde Groupware Webmail Edition from http://www.horde.org/download/app/?app=webmail.
+
+Extract files and rename folder:
+
+
+
+tar zxf horde-webmail-*.tar.gz -C /var/www/html/
+mv /var/www/html/horde-*/ /var/www/html/horde/
+
+
+Creating database and tables in MySQL
+
+
+For those who want everything in UTF-8
+
+MySQL default charset is "latin1" (or ISO-8859-1).
+
+It happens that keeping evertyhing in UTF-8 is a good practice and prevent a lot of trouble in the future, as mentioned here.
+
+If you whish to do so, before you even create your db tables for horde, turn your MySQL installation to UTF-8, inserting these lines into your /etc/my.cnf file:
+
+
+
+[mysqld]
+collation_server=utf8_general_ci
+character_set_server=utf8
+init_connect="SET NAMES 'utf8'"
+
+[client]
+default_character_set=utf8
+
+If you do not want your DB to be UTF-8, just leave the my.cnf as it is.
+
+
+Run the setup.php script:
+
+
+
+cd /var/www/html/horde/scripts/
+./setup.php
+
+If asked, choose /horde.
+
+Press 1; choose mysql; Persistent connection: 0; Username horde; Choose a password for mysql-user-horde; Unix sockets; Location /var/lib/mysql/mysql.sock; DB name horde; internally used charset ut-8 or iso-8859-1 (depends on how you have configured your mysql encoding - see above)
+
+Press 2; yes; root; root-mysql-password.
+
+Press 3; specify an existing IMAP user to have horde administration permissions (i.e. your current linux user).
+
+
+Create user horde in MySQL and grant horde DB the proper permissions
+
+Edit a text file and change the password for the same as in Step 1 above:
+
+
+
+USE mysql;
+
+REPLACE INTO user (host, user, password)
+    VALUES (
+        'localhost',
+        'horde',
+-- IMPORTANT: Change this password!
+        PASSWORD('password_for_mysql_horde_user')
+);
+
+REPLACE INTO db (host, db, user, select_priv, insert_priv, update_priv,
+                 delete_priv, create_priv, drop_priv, index_priv)
+    VALUES (
+        'localhost',
+        'horde',
+        'horde',
+        'Y', 'Y', 'Y', 'Y',
+        'Y', 'Y', 'Y'
+);
+
+-- Make sure that priviliges are reloaded.
+FLUSH PRIVILEGES;
+
+Save the file as createuser.mysql (or something else) and load it as mysql stdin:
+
+
+
+mysql --user=root --password=mysqlrootpassword < createuser.mysql
+
+
+Configure Apache and PHP
+
+Add a "horde.conf" file to /etc/httpd/conf.d:
+
+
+
+#
+# Horde
+#
+
+Alias /horde /var/www/html/horde
+
+<Directory /var/www/html/horde>
+    # Uncomment the following 3 lines to make Horde locally accessible only
+    #Order Deny,Allow
+    #Deny from all
+    #Allow from 127.0.0.1
+
+    Options +FollowSymLinks
+
+    # horde.org's recommended PHP settings:
+    php_admin_flag safe_mode off
+    php_admin_flag magic_quotes_runtime off
+    php_flag session.use_trans_sid off
+    php_flag session.auto_start off
+    php_admin_flag file_uploads on
+    php_value session.gc_divisor 10000
+    php_value session.gc_probability 1
+    # Optional - required for weather block in Horde to function
+    php_admin_flag allow_url_fopen on
+
+    # If horde dies while trying to handle large email file attachments,
+    #  you are probably hitting PHP's memory limit.  Raise that limit here,
+    #  but use caution
+    # Set to your preference - memory_limit should be at least 32M
+    #  and be greater than the value set for post_max_size
+    #php_value memory_limit 32M
+    #php_value post_max_size 20M
+    #php_value upload_max_filesize 10M
+
+    # /usr/share/pear is needed for PEAR. /var/www/html/horde is needed for Horde itself
+    # TODO: Set an appropriate include_path, too. Might even increase speed a bit.
+    php_admin_value open_basedir "/var/www/html/horde:/var/www/html/horde/config:/usr/share/pear:/tmp"
+    php_admin_flag register_globals off
+</Directory>
+
+<Directory /var/www/html/horde/config>
+    Order Deny,Allow
+    Deny from all
+</Directory>
+
+# Deny access to the test.php files except from localhost
+<LocationMatch "^/horde/(.*/)?test.php">
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+</LocationMatch>
+
+Change horde.conf permission:
+
+
+
+chmod 0644 -v /etc/httpd/conf.d/horde.conf 
+
+Increase memory_limit option in /etc/php.ini to 64MB or higher (128MB is recommended):
+
+
+
+memory_limit = 64M
+
+Restart httpd:
+
+
+
+service httpd restart
+
+
+Check if everything is alright
+
+Open the following address in your browser:
+
+
+
+http://localhost.localdomain/horde/test.php
+
+
+Security configuration
+
+Secure config files:
+
+
+
+chown apache:root -R /var/www/html/horde/config
+chown apache:root -R /var/www/html/horde/*/config
+chmod -R go-rwx /var/www/html/horde/config
+chmod -R go-rwx /var/www/html/horde/*/config
+
+Secure scripts:
+
+
+
+chown -R root:root /var/www/html/horde/scripts
+chown -R root:root /var/www/html/horde/*/scripts
+chmod -R go-rwx /var/www/html/horde/scripts
+chmod -R go-rwx /var/www/html/horde/*/scripts
+
+Secure test.php:
+
+
+
+chmod a-rwx /var/www/html/horde/test.php
+chmod a-rwx /var/www/html/horde/*/test.php
+
+
+Finishing configuration
+
+Open the following url in your browser and log into horde with the administrator user (defined above in Option 2 when creating databases):
+
+
+
+http://localhost.localdomain/horde
+
+(PS: use full URL address, with host and domain name)
+(PS2: Remember to check $conf['cookie']['path'] = '/horde'; in horde/config/conf.php to match the path you use to access horde on your server)
+
+Fell free to change other options, as you like. The good thing about Horde Groupware Webmail Edition is it comes pretty much configured and ready for use!
+
+Remember to restart httpd after you make changes:
+
+
+
+service httpd restart
+
+
+Performance
+
+
+Memcached
+
+Memcached is a great performance utility. In order to use it you will need the pecl memcache extension and the memcached package:
+
+
+
+yum install php-pecl-memcache memcached
+
+Then, configure the memcached by editing the file /etc/sysconfig/memcached:
+
+
+
+PORT="11211"
+USER="memcached"
+MAXCONN="1024"
+CACHESIZE="512"        <- Amount of memory to use (in MB)
+OPTIONS=""
+
+Turn on the service on the default runlevel and start it:
+
+
+chkconfig memcached on
+service memcached start
+
+Finish configurarion on Horde -> Administration -> Setup -> Horde -> Cache System (and) Memcache Server.
+
+
+MySQL
+
+You could try to increase mysql performance by enabling query cache feature.
+
+Edit your /etc/my.cnf and add the following under [mysqld]:
+
+
+
+query-cache-size=50M  (or whatever you think is enough)
+
+Run the exact same queries and then, on mysql console, check on query cache status:
+
+
+
+mysql> show status like '%qcache%';
+

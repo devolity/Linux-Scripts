@@ -1,0 +1,47 @@
+#### http://www.virtualmin.com/documentation/developer/cli/virtual_servers/
+
+****CREATE USER UNDER DOMAIN****
+
+virtualmin create-user --domain cl260.flashmailindia.biz --user jimmy --pass smeg --quota 1024 --real "Jimmy Smith"
+
+
+*****CREATE VIRTUAL SERVER ****
+
+virtualmin create-domain --domain foo.com --pass smeg --desc "The server for foo" --unix --dir --webmin --web --dns --mail --limits-from-plan
+
+******DELETE Virtual Server
+virtualmin delete-domain  --domain imglink.fastkick.org
+
+**********************
+
+vs=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1) [Random name generater]
+
+cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 5 | head -n 1  [Random word generater]
+
+echo abc.xyz.com | awk -F'.' '{ print $1 }'
+
+****************************
+wget https://dl.dropboxusercontent.com/u/17801313/Linkserver.zip
+un=`hostname -s`
+unzip Linkserver.zip  -d /home/$un/public_html/
+*****************************
+mysql -D policyd -uroot -prvgyDFjkYop -e "SELECT id FROM policies WHERE name='Test' LIMIT 1"
+
+SELECT ID FROM policies where Priority='100' ORDER BY Name DESC" | grep -o '[0-9]*'`
+
+#################COMPLETED###################
+
+#!/bin/bash
+read -p "Enter The Mysql password = " mp
+read -p "Enter The Policy User Name = " pu
+read -p "Enter The Mail Limits = " lm
+
+mysql -D policyd -u root -p$mp << EOF
+INSERT INTO policies (Name, Priority, Description, Disabled) VALUE ('$pu','100','SMTP User Policy', 0 );
+INSERT INTO policy_members (PolicyID, Source, Destination, Comment, Disabled) VALUE ((SELECT id FROM policies WHERE name='$pu' LIMIT 1),'$pu', 'any', '$pu', 0);
+INSERT INTO quotas (PolicyID, Name, Track, Period, Verdict, Data, LastQuota, Comment, Disabled) VALUE ((SELECT id FROM policies WHERE name='$pu' LIMIT 1),'$pu', 'SASLUsername', '3600', 'REJECT', 'You have reached your limit', 0, '$pu', 0);
+INSERT INTO quotas_limits (QuotasID, Type, CounterLimit, Comment, Disabled) VALUE ((SELECT id FROM quotas WHERE PolicyID=(SELECT id FROM policies WHERE name='$pu' LIMIT 1) LIMIT 1), 'MessageCount' , '$lm', '$pu', 0);
+EOF
+
+~
+~

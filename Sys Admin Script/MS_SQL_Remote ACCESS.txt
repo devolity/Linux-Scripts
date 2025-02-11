@@ -1,0 +1,23 @@
+#### Well, glad I asked. The solution I finally discovered was here:
+
+How do I configure SQL Server Express to allow remote tcp/ip connections on port 1433?
+
+# Run SQL Server Configuration Manager.
+# Go to SQL Server Network Configuration > Protocols for SQLEXPRESS.
+# Make sure TCP/IP is enabled.
+So far, so good, and entirely expected. But then:
+
+# Right-click on TCP/IP and select Properties.
+# Verify that, under IP2, the IP Address is set to the computer's IP address on the local subnet.
+Scroll down to IPAll.
+Make sure that TCP Dynamic Ports is blank. (Mine was set to some 5-digit port number.)
+Make sure that TCP Port is set to 1433. (Mine was blank.)
+(Also, if you follow these steps, it's not necessary to enable SQL Server Browser, and you only need to allow port 1433, not 1434.)
+
+These extra five steps are something I can't remember ever having had to do in a previous version of SQL Server, Express or otherwise. They appear to have been necessary because I'm using a named instance (myservername\SQLEXPRESS) on the server instead of a default instance. See here:
+
+Configure a Server to Listen on a Specific TCP Port (SQL Server Configuration Manager)
+
+#### Check 1433 port is open or not by using PORT check In ping.eu.
+
+### If Port is not open By ping.eu then use Firewall to allow 1433 port.

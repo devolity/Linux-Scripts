@@ -1,0 +1,137 @@
+testin on IP - 23.239.78.213, 192.227.139.203, 107.181.166.195
+=========================================================SCRIPT====================================================================
+#!/bin/bash
+#Enter The IP
+echo -e "Please Enter IP "
+read IP
+
+#IP root password
+echo -e "Enter root user password"
+read pass
+
+#Login To SSH Please Wait...
+
+sshpass -p $pass ssh $IP -l root -o StrictHostKeyChecking=no "cat /var/log/maillog | GREP_COLOR='01;32' grep -E --color=always  "to=<" | tail -10"
+
+LOGS== cat /var/log/maillog | GREP_COLOR='01;32' grep -E --color=always  "to=<" | tail -5
+
+scp myfile my_remote_username@server.example.com:
+
+df -k|awk '{if ( $4 >= 90 ) print $4,"      " $7 }'
+
+=====================================================
+yum -y install sshpass
+      or
+
+3)Compile & install from the source
+ 
+#wget http://sourceforge.net/projects/sshpass/files/latest/download -O sshpass.tar.gz
+#tar -zxvf sshpass.tar.gz 
+#cd sshpass-1.05/ 
+#./configure 
+# make 
+# make install
+#which sshpass
+/usr/local/bin/sshpass
+
+4) You can implement this by overwriting a line. Use \r to go back to the beginning of the line without writing \n to the terminal.
+
+Write \n when you're done to advance the line.
+
+Use echo -ne to:
+
+not print \n and
+to recognize escape sequences like \r.
+Here's a demo:
+
+echo -ne '#                          (1%)\r'
+sleep 1
+echo -ne '##                         (2%)\r'
+sleep 1
+echo -ne '###                        (3%)\r'
+sleep 1
+echo -ne '####                       (4%)\r'
+sleep 1
+echo -ne '#####                      (5%)\r'
+sleep 1
+echo -ne '######                     (6%)\r'
+sleep 1
+echo -ne '#######                    (7%)\r'
+sleep 1
+echo -ne '#########                  (8%)\r'
+sleep 1
+echo -ne '###########                (9%)\r'
+sleep 1
+echo -ne '#############              (10%)\r'
+sleep 1
+echo -ne '#############             (66%)\r'
+sleep 1
+echo -ne '#######################   (100%)\r'
+echo -ne '\n'
+
+5)wget http://www.theiling.de/downloads/bar-1.4-src.tar.bz2
+ tar -jxf bar-1.4-src.tar.bz2
+
+
+Refrence == http://www.nextstep4it.com/categories/unix-command/sshpass/
+
+==================SCP==================================
+Copy the file "foobar.txt" from a remote host to the local host
+
+$ scp your_username@remotehost.edu:foobar.txt /some/local/directory
+
+Copy the file "foobar.txt" from the local host to a remote host
+
+$ scp foobar.txt your_username@remotehost.edu:/some/remote/directory
+
+Copy the directory "foo" from the local host to a remote host's directory "bar"
+
+$ scp -r foo your_username@remotehost.edu:/some/remote/directory/bar
+
+Copy the file "foobar.txt" from remote host "rh1.edu" to remote host "rh2.edu"
+
+$ scp your_username@rh1.edu:/some/remote/directory/foobar.txt your_username@rh2.edu:/some/remote/directory/
+
+Copying the files "foo.txt" and "bar.txt" from the local host to your home directory on the remote host
+
+$ scp foo.txt bar.txt your_username@remotehost.edu:~
+
+Copy the file "foobar.txt" from the local host to a remote host using port 2264
+
+$ scp -P 2264 foobar.txt your_username@remotehost.edu:/some/remote/directory
+
+Copy multiple files from the remote host to your current directory on the local host
+
+$ scp your_username@remotehost.edu:/some/remote/directory/\{a,b,c\}
+
+$ scp your_username@remotehost.edu:~/\{foo.txt,bar.txt\}
+=========================================================
+                                    =========CRON========
+
+http://www.thegeekstuff.com/2011/07/cron-every-5-minutes/
+
+============/etc/crontab=========
+
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+
+@daily root rm -f /var/log/procmail.log-* /var/log/cron-* /var/log/maillog-* /var/log/messages-* /var/log/secure-* /var/log/spooler-* /var/log/btmp-*
+
+@daily root rm -f /var/log/procmail.log.* /var/log/cron.* /var/log/maillog.* /var/log/messages.* /var/log/secure.* /var/log/spooler.* /var/log/btmp.*
+
+*/1 * * * * root  echo "test cron"
+
+
+#*/2 * * * * root /bin/mail -s "Test mail" abhishekraw24@yahoo.com
+
+====================================================
+

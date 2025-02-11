@@ -1,0 +1,34 @@
+1. ############
+
+Error on starting dovecot serverice.
+#########
+Error: service(pop3-login): listen(::, 110) failed: Address family not supported by protocol
+Error: socket() failed: Address family not supported by protocol
+Error: service(pop3-login): listen(::, 995) failed: Address family not supported by protocol
+Error: socket() failed: Address family not supported by protocol
+Error: service(imap-login): listen(::, 143) failed: Address family not supported by protocol
+Error: socket() failed: Address family not supported by protocol
+Error: service(imap-login): listen(::, 993) failed: Address family not supported by protocol
+Fatal: Failed to start listeners
+#########
+
+for this do:-
+
+vi /etc/dovecot/dovecot.conf
+
+do :- listen = *
+
+By default is :-
+
+listen = *, ::
+
+service dovecote restart
+
+
+
+
+
+
+
+
+

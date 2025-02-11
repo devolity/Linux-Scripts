@@ -1,0 +1,66 @@
+http://www.infobyip.com/verifyemailaccount.php
+https://www.smtplogic.com/Tools.aspx
+http://www.linux-mag.com/accountManagement/?formType=registrationForm
+
+http://superuser.com/questions/65524/how-do-i-synchronise-two-folders-in-real-time-in-windows-7
+
+23.239.78.213	x471u5RE -- main IP
+
+103.255.101.165 CentoS xK7nbdcpz
+103.255.101.196 LinuxMunch eQ7uunbdc
+
+=====================COMMAND===============================
+
+cat /var/log/maillog | awk '{ if ($1=="Jul" && $2=="3") print $0 }' | egrep  --color 'gmail|yahoo|rediff'
+
+--------------LINK-----------
+http://postfix.1071664.n5.nabble.com/grep-maillog-by-date-td57796.html
+--------BGP-----
+http://community.spiceworks.com/search?utf8=%E2%9C%93&query=bgp+configure
+
+http://community.spiceworks.com/topic/5http://community.spiceworks.com/topic/328890-how-to-change-bgp-neighbor-on-adtran-908e29401-bgp-config
+
+==================GSElog====================
+chrome-extension://mekpfngodchodemgmkhinohkfjefjeea/html/manage.html
+======================================
+09326780196 - sumit marvel pune 
+*****************
+167.160.94.106	rTYqwsOLmjip
+162.245.216.229	uyrfvDGyhowe
+	
+23.228.64.58	tgbqwelopzx
+104.128.224.157	rfvqweaziop	156	Krishna Kumar	Starter without app
+198.55.116.129
+*****************
+http://www.iitk.ac.in/LDP/LDP/abs/html/abs-guide.html
+
+http://subsignal.org/doc/AliensBashTutorial.html
+==========================================================
+(`PolicyID`, `Name`, `Track`, `Period`, `Verdict`, `Data`, `LastQuota`, `Comment`, `Disabled`) VALUE ('$policy_id','$name', 'SASLUsername', '$limit_time', 'REJECT', 'You have reached your limit', 0, '$name' , 0) ")
+mysql_query("INSERT INTO `$tb` (`QuotasID`, `Type`, `CounterLimit`, `Comment`, `Disabled`) VALUE ('$quotas_id', 'MessageCount' , '$limit_credit', '$name', 0) ")
+
+***** mysql -D policyd  -u root -pAse45rftg67 -e "show databases; use policyd; show tables; SELECT * FROM quotas" *****
+
+#!/bin/bash
+id=`mysql -D policyd -uroot -p950b38cd06 -e "use policyd; SELECT ID FROM policies where Priority='100' ORDER BY ID DESC"`
+
+echo $id
+ mysql -D policyd -uroot -p950b38cd06 -e " SELECT ID FROM policies where Priority='100'"
+ mysql -D policyd -uroot -p950b38cd06 -e " SELECT ID FROM quotas  where Name like '%$u00492.sm'"
+
+#!/bin/bash
+reap -p "Enter The Mysql password = " mp
+read -p "Enter The Policy User Name = " pu
+read -p "Enter The Mail Limits = " lm
+
+mysql -D policyd -u root -p$mp << EOF
+set foreign_key_checks=0;
+INSERT INTO policies (Name, Priority, Description, Disabled) VALUE ('$pu','100','SMTP User Policy', 0 );
+IV=`mysql -D policyd -uroot -p$mp -e "use policyd; SELECT ID FROM policies where Priority='100' ORDER BY Name DESC" | grep -o '[0-9]*'`
+INSERT INTO policy_members (PolicyID, Source, Destination, Comment, Disabled) VALUE ('$IV','$pu', 'any', '$pu', 0);
+INSERT INTO quotas (PolicyID, Name, Track, Period, Verdict, Data, LastQuota, Comment, Disabled) VALUE ('$IV','$pu', 'SASLUsername', '3600', 'REJECT', 'You have reached your limit', 0, '$pu', 0);
+INSERT INTO quotas_limits (QuotasID, Type, CounterLimit, Comment, Disabled) VALUE ('$quotas_id', 'MessageCount' , '$lm', '$pu', 0);
+set foreign_key_checks=1;
+EOF
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++

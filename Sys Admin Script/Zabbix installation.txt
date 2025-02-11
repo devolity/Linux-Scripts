@@ -1,0 +1,65 @@
+ yum install mysql-server
+  142  rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
+  143  yum install zabbix-server-mysql zabbix-web-mysql
+  145  mysql -u root -p
+  146  mysql
+  148  service mysqld restart
+  149  mysql
+  150  mysql_secure_installation 
+  151  mysql -u root -p
+
+Scripts
+
+MySQL:
+
+shell> mysql -uroot -p<password>
+mysql> create database zabbix character set utf8 collate utf8_bin;
+mysql> grant all privileges on zabbix.* to zabbix@localhost identified by '<password>';
+mysql> quit;
+shell> mysql -uzabbix -p<password> zabbix < database/mysql/schema.sql
+# stop here if you are creating database for Zabbix proxy
+shell> mysql -uzabbix -p<password> zabbix < database/mysql/images.sql
+shell> mysql -uzabbix -p<password> zabbix < database/mysql/data.sql
+
+  153  yum install zabbix-agent
+  154  service zabbix restart
+  155  cd /usr/share/doc/zabbix-server-mysql-2.4.0/create
+  156  yum install zabbix-server-mysql zabbix-web-mysql
+  161  find / '-name' zabbix-server-*
+  162  cd /usr/share/doc/zabbix-server-mysql-2.4.4/
+  163  ll
+  164  cd create/
+  167  mysql -uroot -pdevolityweb@513 zabbix < schema.sql
+  168  mysql -uroot -pdevolityweb@513 zabbix < images.sql
+  169  mysql -uroot -pdevolityweb@513 zabbix < data.sql
+  170  service zabbix-server start
+  171  service httpd restart
+  172  vi /etc/zabbix/zabbix_server.conf
+
+# vi /etc/zabbix/zabbix_server.conf
+DBHost=localhost
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
+
+  174  service zabbix-server restart
+  176  vi /etc/httpd/conf.d/zabbix.conf 
+php_value max_execution_time 300
+php_value memory_limit 128M
+php_value post_max_size 16M
+php_value upload_max_filesize 2M
+php_value max_input_time 300
+# php_value date.timezone Europe/Riga
+
+
+  177  service zabbix-server restart
+  178  service httpd restart
+  179  vi /etc/httpd/conf.d/zabbix.conf 
+  194  cat /etc/php.ini 
+  197  vi /etc/php.ini
+          data.timezone="Asia/kolkata"
+ 
+  198  service httpd restart
+
+############# Refrence #
+https://www.zabbix.com/documentation/2.4/manual/installation/install_from_packages
