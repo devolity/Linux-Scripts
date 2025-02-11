@@ -1,0 +1,106 @@
+1. yum install mysql-server
+
+2. /sbin/service mysqld start
+
+3. /usr/bin/mysql_secure_installation
+
+4. ALLOW ACCESS From Remote Machine.
+
+-I INPUT -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
+-I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT
+
+5. chkconfig mysqld on
+
+6. Using Mysql SHELL
+
+/usr/bin/mysql -u root -p or mysql -u root -p 
+
+7. SET The Root Password 
+
+/usr/bin/mysqladmin -u root password 'new-password'
+/usr/bin/mysqladmin -u root --password='new-password' -h hostname-of-your-server 'new-password'
+
+8. Find Data base User
+
+SELECT User, Host, Password FROM mysql.user;
+
+9. mysql> SELECT User, Host, Password
+    -> FROM mysql.user;
+
+10 . User Host.
+
+SELECT User, Host, Password FROM mysql.user;
++------------------+-----------+-------------------------------------------+
+| User             | Host      | Password                                  |
++------------------+-----------+-------------------------------------------+
+| root             | localhost | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 |
+| root             | demohost  | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 |
+| root             | 127.0.0.1 | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 |
+|                  | %         |                                           |
++------------------+-----------+-------------------------------------------+
+
+11. Some usefull Command.
+
+a. CREATE DATABASE demodb;
+
+b. SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| demodb             |
+| mysql              |
++--------------------+
+3 rows in set (0.00 sec)
+
+c. Add a database user.
+   CREATE USER 'demouser'@'localhost' IDENTIFIED BY 'demopassword';
+   
+   SELECT User, Host, Password FROM mysql.user;
++------------------+-----------+-------------------------------------------+
+| User | Host | Password                                                   |
++------------------+-----------+-------------------------------------------+
+| root     | localhost | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19         |
+| root     | demohost  | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19         |
+| root     | 127.0.0.1 | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19         |
+| demouser | localhost | *0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6         |
++------------------+-----------+-------------------------------------------+
+
+d. Grant database user permissions
+  GRANT ALL PRIVILEGES ON demodb.* to demouser@localhost;
+  FLUSH PRIVILEGES;
+  SHOW GRANTS FOR 'demouser'@'localhost';
+  +-----------------------------------------------------------------------------------------------------------------+
+| Grants for demouser@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'demouser'@'localhost' IDENTIFIED BY PASSWORD '*0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6' |
+| GRANT ALL PRIVILEGES ON `demodb`.* TO 'demouser'@'localhost'                                                    |
++-----------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+e. Revoking privileges
+
++-----------------------------------------------------------------------------------------------------------------+
+| Grants for demouser@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'demouser'@'localhost' IDENTIFIED BY PASSWORD '*0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6' |
+| GRANT ALL PRIVILEGES ON *.* TO 'demouser'@'localhost'                                                           |
++-----------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+REVOKE ALL ON *.* FROM demouser@localhost;
+GRANT ALL PRIVILEGES ON demodb.* to demouser@localhost;
+SHOW GRANTS FOR 'demouser'@'localhost';
+
++-----------------------------------------------------------------------------------------------------------------+
+| Grants for demouser@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'demouser'@'localhost' IDENTIFIED BY PASSWORD '*0756A562377EDF6ED3AC45A00B356AAE6D3C6BB6' |
+| GRANT ALL PRIVILEGES ON *.* TO 'demouser'@'localhost'                                                           |
++-----------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+Reffernce :- 
+
+http://www.rackspace.com/knowledge_center/article/installing-mysql-server-on-centos

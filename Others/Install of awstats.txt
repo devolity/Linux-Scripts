@@ -1,0 +1,31 @@
+1. yum install epel-release
+
+2. yum install awstats
+
+To Install it do.
+3. cd /usr/share/awstats/tools/
+run 
+./awstats_configure.pl -- and fill the all entries.
+   a. enter default httpd conf path /etc/httpd/conf/httpd.conf
+   b. press enter for by default setting
+
+## 4.  In  vim /etc/httpd/conf.d/awstats.conf
+
+<Directory "/usr/share/awstats/wwwroot">
+    Options ExecCGI
+    AllowOverride None
+    Order allow,deny
+    Allow from 103.255.101.32
+</Directory>
+# Additional Perl modules
+<IfModule mod_env.c>
+    SetEnv PERL5LIB /usr/share/awstats/lib:/usr/share/awstats/plugins
+</IfModule>
+
+5. restart service httpd
+
+6.  http://103.255.101.32/awstats/awstats.pl?config=serv.web.com
+
+refference 
+http://www.server-world.info/en/note?os=CentOS_6&p=httpd&f=15
+http://www.linuxexpert.ro/Linux-Tutorials/setup-awstats-on-centos.html

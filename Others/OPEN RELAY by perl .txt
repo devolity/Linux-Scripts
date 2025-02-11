@@ -1,0 +1,40 @@
+#!/usr/bin/perl -wl
+
+#use strict;
+use Net::SMTP::Server;
+use Net::SMTP::Server::Client;
+use MIME::Lite;
+use MIME::Base64;
+use Authen::SASL;
+
+
+our $host = $ARGV[0] || "104.219.168.38" ;
+our $server = new Net::SMTP::Server($host,25) ||
+  croak("Unable to open SMTP server socket");
+
+print "Waiting for incoming SMTP connections on ".($host eq "0.0.0.0" ? "all IP addresses":$host)."\n";
+$| = 1;
+while(my $conn = $server->accept()) {
+  print "Incoming mail ... from " . $conn->peerhost() ;
+  my $client = new Net::SMTP::Server::Client($conn) ||
+    croak("Unable to process incoming request");
+  if (!$client->process) {
+    print "\nfailed to receive complete e-mail message\n"; next; }
+
+  print " received\n";
+
+
+$msg = MIME::Lite->new(
+                 From     => $client->{FROM},
+                 To       => $client->{TO},
+                 Data     => $client->{MSG},
+                 );
+$msg->attach(Type        => 'image/gif',
+             Path        => '/root/220px-Abraham_Lincoln_November_1863.jpg',
+             Filename    => 'devolitymail-logo.jpg',
+             Disposition => 'attachment'
+            );
+$msg->send('smtp', "104.219.168.38", AuthUser=>"root", AuthPass=>"Maj75cSA" );
+
+}
+

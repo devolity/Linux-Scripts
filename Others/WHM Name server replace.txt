@@ -1,0 +1,10 @@
+     cd /var/named/
+     ll
+     cat hivemsg.com.db
+     cd /
+     tar -cvzf named.tar.gz /var/named/
+     ll
+     replace "ns1.tld6.net" "ns3.tld6.net" -- /var/named/*.db
+     replace "ns2.tld6.net" "ns4.tld6.net" -- /var/named/*.db
+     service named restart
+     cat /var/named/xpertwebsolution.com.db

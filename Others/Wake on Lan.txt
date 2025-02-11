@@ -1,0 +1,76 @@
+Sometimes called Remote Wake-up, Wake on LAN is technology that allows someone to turn on a network computer remotely by sending a special data packet (called a Magic Packet). Even if the computer is turned off, the network adapter is still "listening" on the network, so when the special packet arrives, the network adapter can turn on the computer.
+
+Wake on LAN is mainly used by system administrators to perform computer maintenance tasks remotely. The computer receiving the Magic Packet must have a motherboard, network adapter, adapter driver, and computer basic input/output system (BIOS) that work with Wake on LAN.
+
+####################################3
+
+
+WAKE ON LAN ********** ON SERVER SIDE.
+
+find interface name by.
+
+1. ifconfig
+
+2. ethtool eth0 
+
+##############
+[root@localhost ~]# ethtool eth0
+Settings for eth0:
+	Supported ports: [ TP ]
+	Supported link modes:   10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	Supported pause frame use: No
+	Supports auto-negotiation: Yes
+	Advertised link modes:  Not reported
+	Advertised pause frame use: No
+	Advertised auto-negotiation: Yes
+	Speed: 100Mb/s
+	Duplex: Full
+	Port: Twisted Pair
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	MDI-X: Unknown
+	Supports Wake-on: pg
+	Wake-on: d ****************
+	Current message level: 0x0000003f (63)
+			       drv probe link timer ifdown ifup
+	Link detected: yes
+
+#############################
+Do Wake-on: d to wake-on: g by:
+
+3. ethtool -s eth0 wol g
+
+Make it parmanent BY :- 
+
+4. echo '/usr/sbin/ethtool -s eth0 wol g' >> /etc/rc.d/rc.local
+
+or by manually write line in file. 
+Line **-   /usr/sbin/ethtool -s eth0 wol g
+
+file **-  /etc/rc.d/rc.local
+
+### 
+grep Server MAC Address BY:
+
+5. ip link show eth0 | awk '/ether/ {print $2}'
+
+8c:89:a5:35:9f:6b
+
+################################################################3
+
+ON CLIENT SIDE INSTALL Package:
+
+apt-get install etherwake 
+or
+yum install ether-wake
+
+
+***********
+
+For wake UP Type.
+
+etherwake 8c:89:a5:35:9f:6b
+**************************
+

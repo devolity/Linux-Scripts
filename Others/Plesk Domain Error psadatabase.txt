@@ -1,0 +1,16 @@
+1. c:\Program Filesx86\Parallels\plesk\Mysql\bin
+
+2. mysql -p8306 -u root -p 
+
+3. show databases;
+
+4. use psa;
+
+5. show tables;
+
+6. select * from domains \G or  ;
+
+7. select * from domains where name='eti.edu.in' \G
+
+8. delete from domains where name='eti.edu.in' \G
+

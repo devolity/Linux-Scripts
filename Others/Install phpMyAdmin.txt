@@ -1,0 +1,28 @@
+Install phpMyAdmin
+
+##############
+yum install epel-release
+
+yum -y install php php-mysql phpmyadmin
+ 
+#############
+ 
+vi /etc/httpd/conf.d/phpMyAdmin.conf
+ 
+ . . .
+Require ip your_workstation_IP_address
+. . .
+Allow from your_workstation_IP_address
+. . .
+Require ip your_workstation_IP_address
+. . .
+Allow from your_workstation_IP_address
+. . .
+
+service httpd restart
+
+http://server_domain_or_IP/phpMyAdmin 
+
+ Biblography:
+ 
+ 
