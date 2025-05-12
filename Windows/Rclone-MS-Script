@@ -1,0 +1,48 @@
+# Rclone 
+copy and move batch Script
+
+rclone.exe copy --update --transfers 32 --checkers 8 --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 --stats 1s D:\Raw-Backup\7z-Backup\ Mega-A-GMAIL:/ARAW-PC/ --progress
+
+
+C:\ARAW\OneDrive\Software\rclone\rclone.exe moveto --update --transfers 32 --checkers 8 --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 --stats 1s D:\Raw-Backup\7z-Backup\ Mega-A-GMAIL:/ARAW-PC/ --progress
+
+
+-------
+-------------
+
+:: initialize currenct date time variable
+for /f "delims=" %%a in ('wmic OS Get localdatetime  ^| find "."') do set dt=%%a
+set YYYY=%dt:~0,4%
+set MM=%dt:~4,2%
+set DD=%dt:~6,2%
+set HH=%dt:~8,2%
+set Min=%dt:~10,2%
+set Sec=%dt:~12,2%
+
+:: set stamp=%YYYY%-%MM%-%DD%_%HH%-%Min%-%Sec%
+:: set stamp=%YYYY%%MM%%DD%
+set stamp=%YYYY%-%MM%-%DD%_%HH%%Min%%Sec%
+
+set archive_folder_directory="D:\Raw-Backup\7z-Backup\"
+
+:: create folder if not exist
+::if not exist %temp_folder_directory% mkdir %temp_folder_directory%
+::if not exist %repository_folder_directory% mkdir %repository_folder_directory%
+
+:: copy folders, subfolders, subfiles
+::xcopy "D:\xampp\htdocs\develop\demo" %temp_folder_directory% /s/h/e/k/f/c
+::rem xcopy...
+
+:: Backup ARAW Directory
+::"C:\ARAW\OneDrive\00-Application\7zip\7z.exe" a -t7z -mx=5 -xr!OneDrive -xr!Git-Backup "%archive_folder_directory%\ARAW.%stamp%.7z" C:\ARAW\
+
+:: Backup OneDrive Directory
+::"C:\ARAW\OneDrive\00-Application\7zip\7z.exe" a -t7z -mx=5 "%archive_folder_directory%\OneDrive.%stamp%.7z" C:\ARAW\OneDrive\
+
+:: Backup GitBackup Directory
+"C:\ARAW\OneDrive\00-Application\7zip\7z.exe" a -t7z -mx=5 "%archive_folder_directory%\Git-Backup.%stamp%.7z" C:\ARAW\Git-Backup\
+
+:: remove folder
+::rmdir /Q/S %temp_folder_directory%
+
+PAUSE

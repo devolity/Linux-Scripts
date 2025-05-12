@@ -1,9 +1,9 @@
 #!/bin/bash
 clear
 echo -e "o---------------------------------------------------o"
-echo -e "|              :: Devolity Enterprise ::               |"
+echo -e "|              :: Aidbs Technology ::               |"
 echo -e "o---------------------------------------------------o"
-echo -e "|             https://www.devolity.com                 |"
+echo -e "|             https://www.aidbs.com                 |"
 echo -e "|                                                   |"
 echo -e "|   Note :- This Script is tested on Centos 7.x     |"
 echo -e "o---------------------------------------------------o"

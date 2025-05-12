@@ -1,0 +1,93 @@
+
+Hi Team,
+
+
+1. Server Name: APPLICATION SERVER
+==================================
+
+Disk Space:
+----------
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       131G   13G  112G  11% /
+udev            2.0G  4.0K  2.0G   1% /dev
+tmpfs           791M 1020K  790M   1% /run
+none            5.0M     0  5.0M   0% /run/lock
+none            2.0G  144K  2.0G   1% /run/shm
+none            100M   16K  100M   1% /run/user
+/dev/sdb1       135G   60G   69G  47% /home
+/dev/sdc1       135G   64G   65G  50% /backup
+/dev/sdd1       917G  184G  688G  22% /mnt
+
+Swap Status:
+-----------
+             total       used       free     shared    buffers     cached
+Mem:          3954       3729        224          0        358       2319
+-/+ buffers/cache:       1051       2902
+Swap:         4093         32       4061
+
+Current Load Average:
+--------------------
+ 0.00, 0.01, 0.05
+
+
+
+...............................................................................................................
+
+
+
+2. Server Name: SERVER MANAGEMENT & FILE SHARING SERVER
+===========================================================
+
+Disk Space:
+----------
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda3              48G   42G  3.6G  93% /
+/dev/sda2              76G   41G   32G  57% /software
+/dev/sdb1             132G  111G   14G  89% /share
+/dev/sdc1             133G  111G   15G  89% /home
+/dev/sda1              99M   12M   82M  13% /boot
+tmpfs                 3.9G     0  3.9G   0% /dev/shm
+
+Swap Status:
+-----------
+             total       used       free     shared    buffers     cached
+Mem:          7983       7855        128          0        626       6595
+-/+ buffers/cache:        633       7350
+Swap:         8001          0       8000
+
+Current Load Average:
+--------------------
+ 0.00, 0.02, 0.00
+
+
+
+
+3. Server Name: INTERNAL MAIL SERVER
+=======================================
+
+Disk Space:
+----------
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda1              48G   19G   27G  42% /
+/dev/sda3             234G   13G  209G   6% /home
+tmpfs                 2.0G     0  2.0G   0% /dev/shm
+
+Swap Status:
+-----------
+             total       used       free     shared    buffers     cached
+Mem:          3943       2112       1830          0        308       1015
+-/+ buffers/cache:        787       3155
+Swap:         8001          0       8001
+
+Current Load Average:
+--------------------
+ 0.00, 0.00, 0.00
+
+
+
+Note:- It is a Auto Generated Mail. So please don't reply
+
+
+
+Thanks,
+Deepak Joshi - System Administrator

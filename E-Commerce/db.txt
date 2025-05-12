@@ -1,0 +1,66 @@
+List of all Current backups files with size on  Wed Jul  3 12:02:09 IST 2019.
+
+Percentage of left space in server : 
+26% 14G /
+33% 269G /home
+
+==================
+
+Remark : /home/mysqlbackup/zipker_prod-01-Jul-2019-00-00-01.sql
+/home/mysqlbackup/zipker_prod-01-Jul-2019-04-00-01.sql
+/home/mysqlbackup/zipker_prod-01-Jul-2019-08-00-01.sql
+/home/mysqlbackup/zipker_prod-01-Jul-2019-12-00-01.sql
+/home/mysqlbackup/zipker_prod-01-Jul-2019-16-00-01.sql
+/home/mysqlbackup/zipker_prod-01-Jul-2019-20-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-00-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-04-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-08-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-12-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-16-00-01.sql
+/home/mysqlbackup/zipker_prod-02-Jul-2019-20-00-01.sql
+/home/mysqlbackup/zipker_prod-03-Jul-2019-00-00-01.sql
+/home/mysqlbackup/zipker_prod-03-Jul-2019-04-00-01.sql
+/home/mysqlbackup/zipker_prod-03-Jul-2019-08-00-01.sql
+/home/mysqlbackup/zipker_prod-03-Jul-2019-12-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-00-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-04-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-08-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-12-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-16-00-01.sql
+/home/mysqlbackup/zipker_prod-30-Jun-2019-20-00-01.sql == Is have 0KB in file Size.
+
+==================
+
+0	2019-06-30 00:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-00-00-01.sql
+0	2019-06-30 04:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-04-00-01.sql
+0	2019-06-30 08:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-08-00-01.sql
+0	2019-06-30 12:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-12-00-01.sql
+0	2019-06-30 16:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-16-00-01.sql
+0	2019-06-30 20:00	/home/mysqlbackup/zipker_prod-30-Jun-2019-20-00-01.sql
+11G	2019-06-29 00:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-00-00-01.sql
+11G	2019-06-29 04:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-04-00-01.sql
+11G	2019-06-29 08:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-08-00-01.sql
+11G	2019-06-29 12:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-12-00-01.sql
+11G	2019-06-29 16:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-16-00-01.sql
+11G	2019-06-29 20:02	/home/mysqlbackup/zipker_prod-29-Jun-2019-20-00-01.sql
+11G	2019-06-29 20:22	/home/mysqlbackup/zipker_prod-29-Jun-2019-20-19-48.sql
+11G	2019-06-29 20:29	/home/mysqlbackup/zipker_prod-29-Jun-2019-20-26-51.sql
+11G	2019-06-28 12:02	/home/mysqlbackup/zipker_prod-28-Jun-2019-12-00-01.sql
+11G	2019-06-28 16:02	/home/mysqlbackup/zipker_prod-28-Jun-2019-16-00-01.sql
+11G	2019-06-28 20:02	/home/mysqlbackup/zipker_prod-28-Jun-2019-20-00-01.sql
+0	2019-07-03 00:00	/home/mysqlbackup/zipker_prod-03-Jul-2019-00-00-01.sql
+0	2019-07-03 04:00	/home/mysqlbackup/zipker_prod-03-Jul-2019-04-00-01.sql
+0	2019-07-03 08:00	/home/mysqlbackup/zipker_prod-03-Jul-2019-08-00-01.sql
+0	2019-07-03 12:00	/home/mysqlbackup/zipker_prod-03-Jul-2019-12-00-01.sql
+0	2019-07-02 00:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-00-00-01.sql
+0	2019-07-02 04:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-04-00-01.sql
+0	2019-07-02 08:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-08-00-01.sql
+0	2019-07-02 12:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-12-00-01.sql
+0	2019-07-02 16:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-16-00-01.sql
+0	2019-07-02 20:00	/home/mysqlbackup/zipker_prod-02-Jul-2019-20-00-01.sql
+0	2019-07-01 00:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-00-00-01.sql
+0	2019-07-01 04:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-04-00-01.sql
+0	2019-07-01 08:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-08-00-01.sql
+0	2019-07-01 12:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-12-00-01.sql
+0	2019-07-01 16:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-16-00-01.sql
+0	2019-07-01 20:00	/home/mysqlbackup/zipker_prod-01-Jul-2019-20-00-01.sql
